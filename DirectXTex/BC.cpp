@@ -10,7 +10,7 @@
 //-------------------------------------------------------------------------------------
 
 #include "DirectXTexP.h"
-
+;
 // Experiemental encoding variants, not enabled by default
 //#define COLOR_WEIGHTS
 //#define COLOR_AVG_0WEIGHTS
