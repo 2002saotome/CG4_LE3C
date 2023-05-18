@@ -127,7 +127,7 @@ void FbxLoader::ParseNodeRecursive(Model* model, FbxNode*fbxNode,Node* parent)
     //FBXノードの情報を解析してノードに記録(Todo)
     //FBXノードのメッシュ情報を解析(Todo)
 
-    //子ノードに対して再帰呼び出し
+    //子ノードに対して再帰呼び出し()
     for (int i=0; i < fbxNode->GetChildCount(); i++)
     {
         ParseNodeRecursive(model, fbxNode->GetChild(i));
