@@ -1,4 +1,4 @@
-#include"Model.h"
+#include "Model.h"
 
 void Model::CreateBuffers(ID3D12Device * device)
 {
@@ -24,14 +24,22 @@ void Model::CreateBuffers(ID3D12Device * device)
 
 	//頂点バッファ生成
 	ID3D12Resource* vertBuff = nullptr;
+	//result = device->CreateCommittedResource(
+	//	&heapProp, // ヒープ設定
+	//	D3D12_HEAP_FLAG_NONE,
+	//	&resDesc, // リソース設定
+	//	D3D12_RESOURCE_STATE_GENERIC_READ,
+	//	nullptr,
+	//	IID_PPV_ARGS(&vertBuff));
+	//assert(SUCCEEDED(result));
 	result = device->CreateCommittedResource(
-		&heapProp, // ヒープ設定
+		&CD3DX12_HEAP_PROPERTIES(D3D12_HEAP_TYPE_UPLOAD),
 		D3D12_HEAP_FLAG_NONE,
-		&resDesc, // リソース設定
+		&CD3DX12_RESOURCE_DESC::Buffer(sizeVB),
 		D3D12_RESOURCE_STATE_GENERIC_READ,
 		nullptr,
 		IID_PPV_ARGS(&vertBuff));
-	assert(SUCCEEDED(result));
+
 
 	//頂点バッファへのデータ転送
 	VertexPosNormalUv* vertMap = nullptr;
@@ -98,6 +106,15 @@ void Model::CreateBuffers(ID3D12Device * device)
 		nullptr,
 		IID_PPV_ARGS(&texbuff));
 
+	//テクスチャバッファにデータ転送
+	result = texbuff->WriteToSubresource(
+		0,
+		nullptr,
+		img->pixels,
+		(UINT)img->rowPitch,
+		(UINT)img->slicePitch
+	);
+
 	//SRV用デスクリプタヒープを生成
 	D3D12_DESCRIPTOR_HEAP_DESC descHeapDesc = {};
 	descHeapDesc.Type = D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV;
@@ -119,4 +136,22 @@ void Model::CreateBuffers(ID3D12Device * device)
 		&srvDesc, //テクスチャ設定情報
 		descHeapSRV->GetCPUDescriptorHandleForHeapStart() //ヒープの先頭アドレス
 	);
+}
+
+void Model::Draw(ID3D12GraphicsCommandList* cmdList)
+{
+	//頂点バッファをセット(VBV)
+	cmdList->IASetVertexBuffers(0, 1, &vbView);
+	//インデックスバッファをセット(IBV)
+	cmdList->IASetIndexBuffer(&ibView);
+
+	//デスクリプタヒープのセット
+	ID3D12DescriptorHeap* ppHeaps[] = { descHeapSRV.Get() };
+	cmdList->SetDescriptorHeaps(_countof(ppHeaps), ppHeaps);
+	//シェーダリソースビューをセット
+	cmdList->SetGraphicsRootDescriptorTable(1,
+		descHeapSRV->GetGPUDescriptorHandleForHeapStart());
+
+	//描画コマンド
+	cmdList->DrawIndexedInstanced((UINT)indices.size(), 1, 0, 0, 0);
 }

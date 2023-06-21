@@ -1,3 +1,5 @@
+#pragma once
+
 #include<string>
 #include<DirectXMath.h>
 #include<DirectXTex.h>
@@ -45,6 +47,7 @@ public: //サブクラス
 		DirectX::XMFLOAT2 uv; //uv座標
 	};
 
+private:
 	//メッシュを持つノード
 	Node* meshNode = nullptr;
 	//頂点データ配列
@@ -61,11 +64,13 @@ public: //サブクラス
 	//スクラッチイメージ
 	DirectX::ScratchImage scratchImg = {};
 
-	//バッファの生成
-	void CreateBuffers(ID3D12Device* device);
-
+	
+public:
 	//描画
 	void Draw(ID3D12GraphicsCommandList* cmdList);
+	//バッファの生成
+	void CreateBuffers(ID3D12Device* device);
+	
 
 private: //エイリアス
 	//Microsoft::WRL::を省略
@@ -83,6 +88,7 @@ private: //エイリアス
 	template<class T>using Vector =
 		std::vector<T>;
 
+private:
 	//頂点バッファ
 	ComPtr<ID3D12Resource> vertBuff;
 	//インデクスバッファ
@@ -90,18 +96,19 @@ private: //エイリアス
 	//テクスチャバッファ
 	ComPtr<ID3D12Resource> texbuff;
 	//頂点バッファビュー
-	D3D12_VERTEX_BUFFER_VIEW ivbView = {};
+	D3D12_VERTEX_BUFFER_VIEW vbView = {};
 	//インデックスバッファビュー
 	D3D12_INDEX_BUFFER_VIEW ibView = {};
 	//SRV用デスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap>descHeapSRV;
 
 	// 頂点バッファビューの作成
-	D3D12_VERTEX_BUFFER_VIEW vbView{};
+	//D3D12_VERTEX_BUFFER_VIEW vbView{};
 
+public:
+	//モデルの変形行列取得
 	const XMMATRIX& GetModelTransform()
 	{
 		return meshNode->globalTransform;
 	}
-	
 };
