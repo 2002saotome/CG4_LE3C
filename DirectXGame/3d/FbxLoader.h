@@ -76,6 +76,8 @@ public: //定数
 	void ParseMeshFaces(Model* model, FbxMesh* fbxMesh);
 	//マテリアル読み取り
 	void ParseMaterial(Model* model, FbxNode* fbxNode);
+	//スキニング情報の読み取り
+	void PauseSkin(Model* model, FbxMesh* fbxMesh);
 	//テクスチャ読み込み
 	void LoadTexture(Model* model, const std::string& fullpath);
 
@@ -85,4 +87,10 @@ public: //定数
 	//テクスチャがない場合の標準テクスチャファイル名
 	static const string defaultTextureFileName;
 
+	/// <summary>
+	/// FBXの行列をXMMatrixに変換
+	/// </summary>
+	/// <param name="model">読み込み先モデルオブジェクト</param>
+	///<param name="fbxNode" >解析対象のノード</param>
+	static void ConvertMatrixFromFbx(DirectX::XMMATRIX* dst, const FbxAMatrix& src);
 };

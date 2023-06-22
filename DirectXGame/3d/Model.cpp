@@ -1,12 +1,18 @@
 #include "Model.h"
 
+Model::~Model()
+{
+	//FBXシーン開放
+	fbxScene->Destroy();
+}
+
 void Model::CreateBuffers(ID3D12Device * device)
 {
 
 	HRESULT result;
 	//頂点の全体のサイズ
 	UINT sizeVB =
-		static_cast<UINT>(sizeof(VertexPosNormalUv) *
+		static_cast<UINT>(sizeof(VertexPosNormalUvskin) *
 			vertices.size());
 
 	// 頂点バッファの設定
@@ -42,7 +48,7 @@ void Model::CreateBuffers(ID3D12Device * device)
 
 
 	//頂点バッファへのデータ転送
-	VertexPosNormalUv* vertMap = nullptr;
+	VertexPosNormalUvskin* vertMap = nullptr;
 	result = vertBuff->Map(0, nullptr, (void**)&vertMap);
 	if (SUCCEEDED(result))
 	{

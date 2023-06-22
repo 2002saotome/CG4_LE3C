@@ -73,7 +73,7 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio * audio)
 
 	//モデル名を指定してファイル読み込み
 	//FbxLoader::GetInstance()->LoadModelFromFile("cube");
-	model1 = FbxLoader::GetInstance()->LoadModelFromFile("cube");
+	model1 = FbxLoader::GetInstance()->LoadModelFromFile("boneTest");
 
 	//3Dオブジェクト生成とモデルのセット
 	object1 = new Object3d;
