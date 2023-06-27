@@ -12,7 +12,7 @@ void Model::CreateBuffers(ID3D12Device * device)
 	HRESULT result;
 	//頂点の全体のサイズ
 	UINT sizeVB =
-		static_cast<UINT>(sizeof(VertexPosNormalUvskin) *
+		static_cast<UINT>(sizeof(VertexPosNormalUvSkin) *
 			vertices.size());
 
 	// 頂点バッファの設定
@@ -48,7 +48,7 @@ void Model::CreateBuffers(ID3D12Device * device)
 
 
 	//頂点バッファへのデータ転送
-	VertexPosNormalUvskin* vertMap = nullptr;
+	VertexPosNormalUvSkin* vertMap = nullptr;
 	result = vertBuff->Map(0, nullptr, (void**)&vertMap);
 	if (SUCCEEDED(result))
 	{

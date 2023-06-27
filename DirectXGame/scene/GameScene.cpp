@@ -6,6 +6,7 @@
 #include"Object3d.h"
 
 using namespace DirectX;
+using namespace DirectX;
 
 GameScene::GameScene()
 {
@@ -61,8 +62,8 @@ void GameScene::Initialize(DirectXCommon* dxCommon, Input* input, Audio * audio)
 	lightGroup = LightGroup::Create();
 
 	// カメラ注視点をセット
-	camera->SetTarget({0, 20, 0});
-	camera->SetDistance(100.0f);
+	camera->SetTarget({0, 5, 0});
+	camera->SetDistance(10.0f);
 
 	//デバイスセット
 	Object3d::SetDevice(dxCommon->GetDevice());

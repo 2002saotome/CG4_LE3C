@@ -77,7 +77,7 @@ public: //定数
 	//マテリアル読み取り
 	void ParseMaterial(Model* model, FbxNode* fbxNode);
 	//スキニング情報の読み取り
-	void PauseSkin(Model* model, FbxMesh* fbxMesh);
+	void ParseSkin(Model* model, FbxMesh* fbxMesh);
 	//テクスチャ読み込み
 	void LoadTexture(Model* model, const std::string& fullpath);
 

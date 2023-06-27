@@ -139,7 +139,7 @@ public://定数
 
 public: //サブクラス
 		//頂点データ構造体
-		struct VertexPosNormalUvskin
+		struct VertexPosNormalUvSkin
 		{
 			DirectX::XMFLOAT3 pos; //x,y,z座標
 			DirectX::XMFLOAT3 normal; //法線ベクトル
@@ -149,7 +149,7 @@ public: //サブクラス
 		};
 
 private:
-	std::vector<VertexPosNormalUvskin> vertices;
+	std::vector<VertexPosNormalUvSkin> vertices;
 
 	FbxScene* fbxScene = nullptr;
 

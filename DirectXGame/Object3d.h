@@ -9,6 +9,7 @@
 #include<d3dx12.h>
 #include<DirectXMath.h>
 #include<string>
+#include<FbxLoader.h>
 
 class Object3d
 {
@@ -69,6 +70,8 @@ public: //メンバ関数
 protected: //メンバ変数
 	//定数バッファ
 	ComPtr<ID3D12Resource>constBuffTransform;
+	//定数バッファ(スキン)
+	ComPtr<ID3D12Resource> constBuffSkin;
 
 	//ルートシグネチャ
 	static ComPtr<ID3D12RootSignature> rootsignature;
@@ -85,5 +88,14 @@ protected: //メンバ変数
 	XMMATRIX matWorld;
     //モデル
 	Model* model = nullptr;
+public: //定数
+	//ボーンの最大数
+	static const int MAX_BONES = 32;
+
+	struct ConstBufferDataSkin
+	{
+		XMMATRIX bones[MAX_BONES];
+	};
+
 
 };
