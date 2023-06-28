@@ -98,6 +98,7 @@
     <ClCompile Include="2d\DebugText.cpp" />
     <ClCompile Include="base\DirectXCommon.cpp" />
     <ClCompile Include="Object3d.cpp" />
+    <ClCompile Include="PostEffect.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
     <ClCompile Include="input\Input.cpp" />
     <ClCompile Include="main.cpp" />
@@ -112,6 +113,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="2d\PostEffect.h" />
     <ClInclude Include="2d\Sprite.h" />
     <ClInclude Include="3d\CircleShadow.h" />
     <ClInclude Include="3d\DirectionalLight.h" />
