@@ -55,7 +55,7 @@ int WINAPI WinMain(HINSTANCE,HINSTANCE,LPSTR,int)
 	FbxLoader::GetInstance()->Initialize(dxCommon->GetDevice());
 
 	//ポストエフェクト用テクスチャの読み込み
-	Sprite::LoadTexture(100, L"Resources/white1x1.png");
+    //Sprite::LoadTexture(100, L"Resources/white1x1.png");
 	//ポストエフェクトの初期化
 	postEffect = new PostEffect();
 	postEffect->Initialize();
