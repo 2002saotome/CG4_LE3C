@@ -49,7 +49,7 @@ public:
     void CreateGraphicsPipelineState();
 
    //テクスチャバッファ
-    ComPtr<ID3D12Resource> texBuff;
+    ComPtr<ID3D12Resource> texBuff[2];
     //SRVデスクリプタヒープ
     ComPtr<ID3D12DescriptorHeap> descHeapSRV;
     //深度バッファ
